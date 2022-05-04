@@ -1,1 +1,1 @@
-# Project-2-openToIntern
+# Project-2-open-To-Intern
