@@ -1,5 +1,8 @@
 const mongoose=require('mongoose')
-const internScema=new mongoose.Schema({
+
+const ObjectId=mongoose.Schema.Types.ObjectId;
+
+const internSchema=new mongoose.Schema({
     name: {
     type:String,
     required:true,
@@ -16,7 +19,7 @@ const internScema=new mongoose.Schema({
       unique:true
   },
    collegeId: {
-       type:mongoose.Schema.Types.ObjectId,
+       type:ObjectId,
         ref :'College'
     },
      isDeleted: {
@@ -26,3 +29,4 @@ const internScema=new mongoose.Schema({
     
     })
  
+    module.exports=mongoose.model('Intern',internSchema)//intern

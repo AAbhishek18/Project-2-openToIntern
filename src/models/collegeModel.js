@@ -1,11 +1,12 @@
 
 
 const mongoose = require('mongoose')
+const ObjectId=mongoose.Schema.Types.ObjectId
 const collegeSchema = new mongoose.Schema({
      name: {
         type:String,
         unique:true,
-        rwquired:true
+        required:true
         },
 
          fullName: {
@@ -17,6 +18,8 @@ const collegeSchema = new mongoose.Schema({
              type:String,
              requred:true,
             },
+
+        
 
          isDeleted: {
                    type:Boolean,
