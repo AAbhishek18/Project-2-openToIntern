@@ -1,6 +1,11 @@
 const collegeModel = require('../models/collegeModel');
 const internModel=require('../models/internModel')
 
+
+function validateMobile(mobile){
+ var mobilePattern=  /^[6-9]\d{9}$/gi;
+ return mobilePattern.test(mobile)
+}
  
 function validateEmail(usermail){
     var emailPattern=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -10,7 +15,7 @@ function validateEmail(usermail){
 const createIntern =async function(req,res){
     try{
         let intern=req.body;
-        if(Object.keys(intern)!=0){
+        if(Object.keys(intern).length!=0){
             if(!intern.name) return res.status(400).send({status:false,mgs:'Name is required'})
 
            if(!intern.email) return res.status(400).send({status:false,msg:'Email is reuired'})
@@ -19,6 +24,7 @@ const createIntern =async function(req,res){
            if(usedEmail.length!=0) return res.status(400).send({status:false,msg:"Email already used!"})
           
            if(intern.mobile.length!==10) return res.status(400).send({status:false,msg:"Mobile number must be 10 digits only"})
+           if(!validateMobile(intern.mobile)) return res.status(400).send({status:false,msg:'Enter valid Mobile number'})
            let udesdMoblie=await internModel.findOne({mobile:intern.mobile})
            if(udesdMoblie!==null){return res.status(400).send({status:false,msg:`${mobile} mobile numeer is already used`})}
 
