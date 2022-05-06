@@ -27,7 +27,7 @@ const createIntern =async function(req,res){
            if(!validateMobile(intern.mobile)) return res.status(400).send({status:false,msg:'Enter valid Mobile number'})
            
            let udesdMoblie=await internModel.findOne({mobile:intern.mobile})
-           if(udesdMoblie!==null){return res.status(400).send({status:false,msg:`${mobile} mobile numeer is already used`})}
+           if(udesdMoblie!==null){return res.status(400).send({status:false,msg:`${intern.mobile} mobile numeer is already used`})}
 
            if(!intern.collegeName){ return res.status(400).send({status:false ,msg:" College name is required"})}
 
