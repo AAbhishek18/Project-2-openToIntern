@@ -41,6 +41,10 @@ const createIntern =async function(req,res){
             let internCreated=await internModel.create(intern)
              res.status(201).send({status:true,msg:'Intern succsessfully created',data:internCreated })
         }
+        else{
+        if(Object.keys(intern).length==0) {return res.status(400).send({msg:'Plz Give Intern details'})}
+
+        }
     }
 
     catch(err){

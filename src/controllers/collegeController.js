@@ -6,7 +6,7 @@ const createCollege = async function(req,res){
     try{
 
     let college=req.body
-    if(Object.keys(college).length==null) {return res.status(400).send({msg:'Give input in body'})}
+    
     //console.log(college)
     if(Object.keys(college).length!=0){
         
@@ -20,6 +20,9 @@ const createCollege = async function(req,res){
       let collegeCreated =await collegeModel.create(college)
        res.status(201).send({status:true,msg:'College successfully created',data:collegeCreated})
    
+    }
+    else{
+        if(Object.keys(college).length==0) {return res.status(400).send({msg:'Plz Give College details'})}
     }
     }
     catch(err){
