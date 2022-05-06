@@ -25,6 +25,7 @@ const createIntern =async function(req,res){
           
            if(intern.mobile.length!==10) return res.status(400).send({status:false,msg:"Mobile number must be 10 digits only"})
            if(!validateMobile(intern.mobile)) return res.status(400).send({status:false,msg:'Enter valid Mobile number'})
+           
            let udesdMoblie=await internModel.findOne({mobile:intern.mobile})
            if(udesdMoblie!==null){return res.status(400).send({status:false,msg:`${mobile} mobile numeer is already used`})}
 

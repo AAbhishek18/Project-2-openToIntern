@@ -6,13 +6,18 @@ const createCollege = async function(req,res){
     try{
 
     let college=req.body
+    if(Object.keys(college).length==null) {return res.status(400).send({msg:'Give input in body'})}
     //console.log(college)
     if(Object.keys(college).length!=0){
         
        if(!college.name) return res.status(400).send({status:false,msg:'Name is required!'})
        if(!college.fullName) return res.status(400).send({status:false,msg:'fullName is required'}) 
        if(!college.logoLink) return res.status(400).send({status:false,msg:'LogoLink is required!'})
-       let collegeCreated =await collegeModel.create(college)
+      
+       let usedCollegeName= await collegeModel.findOne({name:college.name})
+      if(usedCollegeName!==null) return res.status(400).send({status:false,msg:'Use unique college name'})
+      
+      let collegeCreated =await collegeModel.create(college)
        res.status(201).send({status:true,msg:'College successfully created',data:collegeCreated})
    
     }
