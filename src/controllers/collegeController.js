@@ -14,7 +14,7 @@ const createCollege = async function(req,res){
        if(!college.fullName) return res.status(400).send({status:false,msg:'fullName is required'}) 
        if(!college.logoLink) return res.status(400).send({status:false,msg:'LogoLink is required!'})
       
-       let usedCollegeName= await collegeModel.findOne({name:college.name}).select({_v:0})
+       let usedCollegeName= await collegeModel.findOne({name:college.name}).select({__v:0})
       if(usedCollegeName!==null) return res.status(400).send({status:false,msg:'Use unique college name'})
       
       let collegeCreated =await collegeModel.create(college)
@@ -41,7 +41,7 @@ const createCollege = async function(req,res){
         if(collegeId==null) return res.status(400).send({status:false,msg:"College not exist"})
                  let clgId=collegeId._id
                  //console.log(clgId)
-                 let allinterns =await internModel.find({collegeId:clgId,isDeleted:false}).select({collegeId:0,isDeleted:0,createdAt:0,updatedAt:0,_v:0})
+                 let allinterns =await internModel.find({collegeId:clgId,isDeleted:false}).select({collegeId:0,isDeleted:0,createdAt:0,updatedAt:0,__v:0})
       if(allinterns.length == 0) allinterns="No Iterns"
       let collegeDetails=await collegeModel.findOne({name:requestCollege,isDeleted:false}).select({_id:0})
      
