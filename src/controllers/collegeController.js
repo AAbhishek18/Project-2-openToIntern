@@ -14,7 +14,7 @@ const createCollege = async function(req,res){
        if(!college.fullName) return res.status(400).send({status:false,msg:'fullName is required'}) 
        if(!college.logoLink) return res.status(400).send({status:false,msg:'LogoLink is required!'})
       
-       let usedCollegeName= await collegeModel.findOne({name:college.name})
+       let usedCollegeName= await collegeModel.findOne({name:college.name}).select({_v:0})
       if(usedCollegeName!==null) return res.status(400).send({status:false,msg:'Use unique college name'})
       
       let collegeCreated =await collegeModel.create(college)
